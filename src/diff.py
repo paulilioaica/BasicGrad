@@ -81,3 +81,28 @@ class MulOperation(Operation):
             a.grad += b.data * out.grad
             b.grad += a.data * out.grad
         return _backward
+    
+
+class ActivationFunction:
+    def apply(self, *args):
+        out = self.forward(*args)
+        out._backward = self._build_backward_function(*args, out)
+        return out
+
+    def forward(self, *args):
+        raise NotImplementedError
+
+    def _build_backward_function(self, *args, out):
+        raise NotImplementedError
+    
+
+class ReLUActivation(ActivationFunction):
+    def forward(self, input):
+        out = Variable(max(0, input.data), (input,))
+        return out
+    
+    def _build_backward_function(self, input, out):
+        # Derivative of ReLU: 1 if input > 0 else 0
+        def _backward():
+            input.grad += (out.data > 0) * out.grad
+        return _backward
