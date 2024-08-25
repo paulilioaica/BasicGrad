@@ -135,9 +135,6 @@ BasicGrad is a simplified and educational framework that offers a glimpse into h
 - **Prototyping**: Quickly experiment with new ideas and custom operations.
 - **Teaching**: Use it as a teaching aid to explain concepts in a clear and concise manner.
 
-Sure! Here's the "Features to Come" section:
-
----
 
 ## 🔮 Features to Come
 
