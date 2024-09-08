@@ -1,4 +1,4 @@
-from activation_function import ActivationFunction
+from activation_functions.activation import ActivationFunction
 
 class ReLUActivation(ActivationFunction):
     def forward(self, input):

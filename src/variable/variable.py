@@ -1,4 +1,4 @@
-from basic_ops import *
+from ops.basic_ops import *
 
 class Variable:
     def __init__(self, value, _children=(), _op=None) -> None:
@@ -48,7 +48,7 @@ class Variable:
         return order
 
     def __repr__(self):
-        return f"Variable(data={self.value}, grad={self.grad})"
+        return f"Variable(data={self.value}, grad={self.grad}), _op={self._op}, history={self._prev}"
 
 
 
