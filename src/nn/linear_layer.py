@@ -21,7 +21,7 @@ class LinearLayer:
                 current_value = Variable(value=0)
                 
                 for j in range(self.input_size):
-                  current_value += self.weight[i][j]
+                    current_value += self.weight[i][j] * input[batch][j]
                 
                 output[batch][i] = current_value
 
