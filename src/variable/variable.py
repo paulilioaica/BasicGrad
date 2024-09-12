@@ -1,12 +1,13 @@
 from ops.basic_ops import *
 
 class Variable:
-    def __init__(self, value, _children=(), _op=None) -> None:
+    def __init__(self, value, _children=(), _op=None, _name=None) -> None:
         self.value = value
         self.grad = 0
         self._op = _op
         self._prev = set(_children)
         self._backward = lambda: None
+        self._name = _name
 
     def __add__(self, other):
         return self._apply(AddOperation(), other)
@@ -27,7 +28,6 @@ class Variable:
         return other
 
     def backward(self):
-        self.grad = 1
         topological_order = self._build_topological_order()
 
         for node in reversed(topological_order):
@@ -48,7 +48,7 @@ class Variable:
         return order
 
     def __repr__(self):
-        return f"Variable(data={self.value}, grad={self.grad}), _op={self._op}, history={self._prev}"
+        return f"Variable(data={self.value}, grad={self.grad}), _op={self._op}, _prev={self._prev}"
 
 
 
