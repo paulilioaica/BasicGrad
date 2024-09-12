@@ -5,12 +5,14 @@ class ActivationFunction:
             for batch in args[0]:
                 current_batch = []
                 for arg in batch:
-                    value, variable = self.forward(arg)
-                    current_batch.append(variable.__class__(value, (variable,) , _op=self))
+                    value = self.forward(arg)
+                    variable = arg.__class__(value, (arg,), _op=self)
+                    variable._backward = self._build_backward_function(arg, variable)
+                    current_batch.append(variable)
                 out.append(current_batch)
         else:    
             value, variable = self.forward(*args)
-            out = variable.__class__(value, (variable,) , _op=self)
+            out = variable.__class__(value, args, _op=self)
             out._backward = self._build_backward_function(*args, out)
         return out
 

@@ -48,7 +48,7 @@ class Variable:
         return order
 
     def __repr__(self):
-        return f"Variable(data={self.value}, grad={self.grad}), _op={self._op}, _prev={self._prev}"
+        return f"Variable(data={self.value}, grad={self.grad}), _op={self._op}, _prev={self._prev}, _name={self._name}"
 
 
 
