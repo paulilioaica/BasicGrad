@@ -6,6 +6,5 @@ class ReLUActivation(ActivationFunction):
     
     def _build_backward_function(self, input, out):
         def _backward():
-            print(out)
             input.grad += (out.value > 0) * out.grad
         return _backward

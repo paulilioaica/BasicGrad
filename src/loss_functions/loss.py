@@ -5,6 +5,5 @@ class LossFunction:
     def __call__(self, *args):
         raise NotImplementedError
     
-    def _build_backward_function(self, *args, out):
+    def backward(self):
         raise NotImplementedError
-    
