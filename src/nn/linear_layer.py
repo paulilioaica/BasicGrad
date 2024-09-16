@@ -28,3 +28,10 @@ class LinearLayer(Module):
                 output[batch][i] = sum_value + self.bias[i]
 
         return output
+    
+    def parameters(self):
+        params = []
+        for row in self.weight:
+            params.extend(row)
+        params.extend(self.bias)
+        return params

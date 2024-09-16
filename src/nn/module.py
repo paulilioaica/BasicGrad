@@ -6,12 +6,10 @@ class Module:
         raise NotImplementedError
 
     def parameters(self):
-            param_list = []
-            for attr in self.__dict__.values():
-                if isinstance(attr, Module):
-                    param_list.extend(attr.parameters())
-                elif hasattr(attr, '__iter__'):
-                    for item in attr:
-                        if hasattr(item, 'parameters'):
-                            param_list.extend(item.parameters())
-            return param_list
+        param_list = []
+        for attr in self.__dict__.values():
+            if isinstance(attr, Module):
+                param_list.extend(attr.parameters())
+            elif hasattr(attr, 'parameters'):
+                param_list.extend(attr.parameters())
+        return param_list
