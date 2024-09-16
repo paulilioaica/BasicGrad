@@ -1,8 +1,9 @@
 from variable.variable import Variable
+from nn.module import Module
 import random
 
 
-class LinearLayer:
+class LinearLayer(Module):
     def __init__(self, input_size, output_size, dropout=False):
         self.input_size = input_size
         self.output_size = output_size
@@ -27,6 +28,3 @@ class LinearLayer:
                 output[batch][i] = sum_value + self.bias[i]
 
         return output
-    
-    def parameters(self):
-        return [w for row in self.weight for w in row] + self.bias
