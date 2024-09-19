@@ -15,7 +15,6 @@ class Variable:
             instance = super().__new__(cls)
             return instance
         elif isinstance(value, list):
-            # go through the list and wrap all the ints or floats in Variables
             converted_list = Variable._convert(value, _children, _op, _name, requires_grad)
             return converted_list
         else:
@@ -30,7 +29,6 @@ class Variable:
     def _apply(self, operation, other):
         out = operation.apply(self, other)
         return out
-
 
     @staticmethod
     def _convert(value, _children, _op, _name, requires_grad):

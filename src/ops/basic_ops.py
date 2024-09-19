@@ -12,7 +12,6 @@ class AddOperation(Operation):
             b.grad += out.grad  if b.requires_grad else 0
         return _backward
 
-
 class MulOperation(Operation):
     def forward(self, a, b):
         return a.value * b.value
@@ -23,7 +22,6 @@ class MulOperation(Operation):
             b.grad += a.value * out.grad if b.requires_grad else 0
         return _backward
     
-
 class SubOperation(Operation):
     def forward(self, a, b):
         return a.value - b.value
