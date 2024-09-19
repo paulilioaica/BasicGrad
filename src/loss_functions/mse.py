@@ -19,7 +19,6 @@ class MSELoss(LossFunction):
             loss = sum([i**2 for i in differences])
             batch_loss += loss
 
-
         self.loss = batch_loss / batch_size
         return self
 
