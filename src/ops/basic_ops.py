@@ -8,8 +8,8 @@ class AddOperation(Operation):
 
     def _build_backward_function(self, a, b, out):
         def _backward():
-            a.grad += out.grad
-            b.grad += out.grad
+            a.grad += out.grad  if a.requires_grad else 0
+            b.grad += out.grad  if b.requires_grad else 0
         return _backward
 
 
@@ -19,8 +19,8 @@ class MulOperation(Operation):
 
     def _build_backward_function(self, a, b, out):
         def _backward():
-            a.grad += b.value * out.grad
-            b.grad += a.value * out.grad
+            a.grad += b.value * out.grad if a.requires_grad else 0
+            b.grad += a.value * out.grad if b.requires_grad else 0
         return _backward
     
 
@@ -30,8 +30,8 @@ class SubOperation(Operation):
     
     def _build_backward_function(self, a, b, out):
         def _backward():
-            a.grad += out.grad
-            b.grad -= out.grad
+            a.grad += out.grad  if a.requires_grad else 0
+            b.grad -= out.grad  if b.requires_grad else 0
         return _backward
     
 class PowOperation(Operation):
@@ -40,8 +40,8 @@ class PowOperation(Operation):
     
     def _build_backward_function(self, a, b, out):
         def _backward():
-            a.grad += b.value * (a.value ** (b.value - 1)) * out.grad
-            b.grad += (a.value ** b.value) * math.log(a.value) * out.grad
+            a.grad += b.value * (a.value ** (b.value - 1)) * out.grad  if a.requires_grad else 0
+            b.grad += (a.value ** b.value) * math.log(a.value) * out.grad  if b.requires_grad else 0
         return _backward
     
 class DivOperation(Operation):
@@ -50,7 +50,7 @@ class DivOperation(Operation):
     
     def _build_backward_function(self, a, b, out):
         def _backward():
-            a.grad += (1/b.value) * out.grad
-            b.grad -= (a.value / (b.value **2)) * out.grad
+            a.grad += (1/b.value) * out.grad  if a.requires_grad else 0
+            b.grad -= (a.value / (b.value **2)) * out.grad  if b.requires_grad else 0
         return _backward
     

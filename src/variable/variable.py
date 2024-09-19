@@ -1,13 +1,14 @@
 from ops.basic_ops import *
 
 class Variable:
-    def __init__(self, value, _children=(), _op=None, _name=None) -> None:
+    def __init__(self, value, _children=(), _op=None, _name=None, requires_grad=True) -> None:
         self.value = value
         self.grad = 0
         self._op = _op
         self._prev = set(_children)
         self._backward = lambda: None
         self._name = _name
+        self.requires_grad = requires_grad
 
     def __add__(self, other):
         return self._apply(AddOperation(), other)
