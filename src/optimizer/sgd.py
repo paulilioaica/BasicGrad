@@ -5,7 +5,7 @@ class SGDOptimizer:
 
     def step(self):
         for param in self.parameters:
-            param.value -= self.learning_rate * param.grad
+            param.value -= min(self.learning_rate * param.grad, 1.0)
 
     def zero_grad(self):
         for param in self.parameters:
