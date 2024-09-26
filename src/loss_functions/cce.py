@@ -31,8 +31,7 @@ class CategoricalCrossEntropy(LossFunction):
             sample_size = len(self.y_pred[batch])
             for sample in range(sample_size):
                 for i in range(len(self.y_pred[batch][sample])):
-                    pred_value = max(self.y_pred[batch][sample][i].value, self.epsilon)
-                    self.y_pred[batch][sample][i].grad = -self.y_true[batch][sample][i].value / pred_value / batch_size
+                    self.y_pred[batch][sample][i].grad = (self.y_pred[batch][sample][i].value - self.y_true[batch][sample][i].value)
                     self.y_pred[batch][sample][i].backward()
 
     def __repr__(self):
